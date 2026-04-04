@@ -1,0 +1,936 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Untitled</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="33856cf3-9959-807d-b655-fd53906e5873" class="page sans"><header><h1 class="page-title" dir="auto"></h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="33856cf3-9959-8083-a1ba-f035de702666" class=""><code>&lt;!DOCTYPE html&gt;<br/>&lt;html lang=&quot;en&quot;&gt;<br/>&lt;head&gt;<br/>&lt;meta charset=&quot;UTF-8&quot; /&gt;<br/>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0&quot; /&gt;<br/>&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;<br/>&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black-translucent&quot; /&gt;<br/>&lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;Command Center&quot; /&gt;<br/>&lt;title&gt;Command Center&lt;/title&gt;<br/>&lt;link rel=&quot;preconnect&quot; href=&quot;</code><code><a href="https://fonts.googleapis.com/">https://fonts.googleapis.com</a></code><code>&quot; /&gt;<br/>&lt;link href=&quot;</code><code><a href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;display=swap">https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;display=swap</a></code><code>&quot; rel=&quot;stylesheet&quot; /&gt;<br/>&lt;style&gt;<br/>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }<br/>html, body, #root { min-height: 100%; }<br/>body { background: #0f0f11; color: #e8e4dc; font-family: &#x27;Syne&#x27;, sans-serif; -webkit-font-smoothing: antialiased; overscroll-behavior: none; }<br/>input, textarea, button { font-family: inherit; }<br/>input:focus, textarea:focus { outline: none; }<br/>button { cursor: pointer; }<br/>::-webkit-scrollbar { width: 4px; }<br/>::-webkit-scrollbar-track { background: transparent; }<br/>::-webkit-scrollbar-thumb { background: #2a2a30; border-radius: 4px; }<br/>::selection { background: #c8a96e33; }<br/>&lt;/style&gt;<br/>&lt;/head&gt;<br/>&lt;body&gt;<br/>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code></p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80ff-a2b1-cd9d23a9e09d" class="">&lt;script src=&quot;<a href="https://unpkg.com/react@18/umd/react.production.min.js">https://unpkg.com/react@18/umd/react.production.min.js</a>&quot;&gt;&lt;/script&gt;<br/>&lt;script src=&quot;<a href="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js">https://unpkg.com/react-dom@18/umd/react-dom.production.min.js</a>&quot;&gt;&lt;/script&gt;<br/>&lt;script src=&quot;<a href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2</a>&quot;&gt;&lt;/script&gt;<br/>&lt;script src=&quot;<a href="https://unpkg.com/@babel/standalone/babel.min.js">https://unpkg.com/@babel/standalone/babel.min.js</a>&quot;&gt;&lt;/script&gt;</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-800b-b096-f4b0b6332542" class="">&lt;script type=&quot;text/babel&quot;&gt;<br/>const { useState, useEffect, useRef, useCallback } = React;</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-804a-8410-ffb8053ba94e" class="">// ─── CONFIG — paste your Supabase values here ───────────────────────────────<br/>const SUPABASE_URL  = &quot;<a href="https://gvfmbhxojigrwvxiloil.supabase.co/">https://gvfmbhxojigrwvxiloil.supabase.co</a>&quot;;<br/>const SUPABASE_KEY  = &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2Zm1iaHhvamlncnd2eGlsb2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMDk4MTEsImV4cCI6MjA5MDg4NTgxMX0.JgnlAXIAH_p2wfmeqvSRiZ6CcUPVzmov-JHKE9LtHAY&quot;;<br/>// ────────────────────────────────────────────────────────────────────────────</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80c8-b004-d9c16e8306fc" class="">const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80d2-a273-e8d6b9ce2125" class="">const DAYS   = [&quot;Sunday&quot;,&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;];<br/>const MONTHS = [&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;];<br/>const TIMER_DURATION = 25 * 60;</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80ec-b4ca-ead4fdf8c186" class="">const DEFAULT_DATA = {<br/>priorities: [{id:1,text:&quot;&quot;,done:false},{id:2,text:&quot;&quot;,done:false},{id:3,text:&quot;&quot;,done:false}],<br/>dump: [],<br/>goals: [&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;],<br/>weekNotes: { win:&quot;&quot;, obstacle:&quot;&quot;, next:&quot;&quot; },<br/>blocks: [<br/>{id:1,label:&quot;Morning anchor&quot;,start:&quot;05:00&quot;,end:&quot;08:30&quot;,color:&quot;#c8a96e&quot;},<br/>{id:2,label:&quot;Deep work&quot;,start:&quot;09:00&quot;,end:&quot;12:00&quot;,color:&quot;#7eb8a4&quot;},<br/>{id:3,label:&quot;Admin / email&quot;,start:&quot;12:00&quot;,end:&quot;13:30&quot;,color:&quot;#8b9bb4&quot;},<br/>{id:4,label:&quot;Learning&quot;,start:&quot;14:00&quot;,end:&quot;16:00&quot;,color:&quot;#a07ec8&quot;},<br/>{id:5,label:&quot;Shutdown ritual&quot;,start:&quot;18:00&quot;,end:&quot;18:30&quot;,color:&quot;#c87e7e&quot;},<br/>],<br/>};</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8039-b1f6-c502a7205076" class="">function ls(k, fb) { try { const v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : fb; } catch { return fb; } }<br/>function lss(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80b1-851d-d85826133d73" class="">// ── Setup screen ─────────────────────────────────────────────────────────────<br/>function SetupScreen({ onDone }) {<br/>const [key, setKey] = useState(&quot;&quot;);<br/>const [loading, setLoading] = useState(false);<br/>const [err, setErr] = useState(&quot;&quot;);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8046-ba94-c55c6fc5571a" class="">const go = async () =&gt; {<br/>const trimmed = key.trim().toLowerCase().replace(/\s+/g, &quot;-&quot;);<br/>if (trimmed.length &lt; 3) { setErr(&quot;At least 3 characters please&quot;); return; }<br/>setLoading(true); setErr(&quot;&quot;);<br/>try {<br/>const { data, error } = await sb.from(&quot;command_center&quot;).select(&quot;data&quot;).eq(&quot;sync_key&quot;, trimmed).maybeSingle();<br/>if (error) throw error;<br/>lss(&quot;cc_sync_key&quot;, trimmed);<br/>onDone(trimmed, data?.data || null);<br/>} catch (e) {<br/>setErr(&quot;Could not connect. Check your Supabase config.&quot;);<br/>}<br/>setLoading(false);<br/>};</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8028-8652-f5022a507c2e" class="">return (<br/>&lt;div style={{display:&quot;flex&quot;,flexDirection:&quot;column&quot;,alignItems:&quot;center&quot;,justifyContent:&quot;center&quot;,minHeight:&quot;100vh&quot;,padding:&quot;32px&quot;}}&gt;<br/>&lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,letterSpacing:&quot;0.2em&quot;,color:&quot;#c8a96e&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;12px&quot;}}&gt;First time setup&lt;/div&gt;<br/>&lt;h1 style={{fontSize:&quot;24px&quot;,fontWeight:700,color:&quot;#f0ece4&quot;,marginBottom:&quot;8px&quot;,textAlign:&quot;center&quot;}}&gt;Choose a sync key&lt;/h1&gt;<br/>&lt;p style={{fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;14px&quot;,color:&quot;#5a5a62&quot;,marginBottom:&quot;32px&quot;,textAlign:&quot;center&quot;,maxWidth:&quot;280px&quot;,lineHeight:1.6}}&gt;<br/>This is your personal passphrase. Use the same key on every device to keep data in sync.<br/>&lt;/p&gt;<br/>&lt;input<br/>value={key}<br/>onChange={e =&gt; setKey(e.target.value)}<br/>onKeyDown={e =&gt; e.key === &quot;Enter&quot; &amp;&amp; go()}<br/>placeholder=&quot;e.g. jericho-2026&quot;<br/>style={{background:&quot;#17171c&quot;,border:&quot;1px solid #2a2a30&quot;,borderRadius:&quot;8px&quot;,color:&quot;#e8e4dc&quot;,fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;16px&quot;,padding:&quot;14px 16px&quot;,width:&quot;100%&quot;,maxWidth:&quot;320px&quot;,caretColor:&quot;#c8a96e&quot;,marginBottom:&quot;12px&quot;,textAlign:&quot;center&quot;}}<br/>/&gt;<br/>{err &amp;&amp; &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,color:&quot;#c87e7e&quot;,marginBottom:&quot;12px&quot;}}&gt;{err}&lt;/div&gt;}<br/>&lt;button onClick={go} disabled={loading}<br/>style={{background:&quot;#c8a96e&quot;,border:&quot;none&quot;,borderRadius:&quot;8px&quot;,color:&quot;#0f0f11&quot;,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;12px&quot;,fontWeight:500,padding:&quot;12px 32px&quot;,letterSpacing:&quot;0.08em&quot;,textTransform:&quot;uppercase&quot;,opacity:loading?0.6:1}}&gt;<br/>{loading ? &quot;Connecting…&quot; : &quot;Enter&quot;}<br/>&lt;/button&gt;<br/>&lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,color:&quot;#3a3a42&quot;,marginTop:&quot;24px&quot;,textAlign:&quot;center&quot;,maxWidth:&quot;280px&quot;,lineHeight:1.7}}&gt;<br/>New key = fresh data. Existing key = loads your saved data. No password reset — keep it memorable.<br/>&lt;/div&gt;<br/>&lt;/div&gt;<br/>);<br/>}</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-809c-9899-f467eed81629" class="">// ── Main app ──────────────────────────────────────────────────────────────────<br/>function App() {<br/>const [syncKey, setSyncKey] = useState(() =&gt; ls(&quot;cc_sync_key&quot;, null));<br/>const [synced, setSynced] = useState(false);<br/>const [syncStatus, setSyncStatus] = useState(&quot;idle&quot;); // idle | saving | saved | error</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80ad-970d-c788587540ef" class="">const now = new Date();<br/>const today = <code>${now.getFullYear()}-${now.getMonth()}-${now.getDate()}</code>;</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80f4-ab24-d830bfa49e1d" class="">const [tab, setTab] = useState(&quot;today&quot;);<br/>const [priorities, setPriorities] = useState(DEFAULT_DATA.priorities);<br/>const [dump, setDump] = useState(DEFAULT_DATA.dump);<br/>const [dumpInput, setDumpInput] = useState(&quot;&quot;);<br/>const [goals, setGoals] = useState(DEFAULT_DATA.goals);<br/>const [weekNotes, setWeekNotes] = useState(DEFAULT_DATA.weekNotes);<br/>const [blocks, setBlocks] = useState(DEFAULT_DATA.blocks);<br/>const [editBlock, setEditBlock] = useState(null);<br/>const [timerSec, setTimerSec] = useState(TIMER_DURATION);<br/>const [timerOn, setTimerOn] = useState(false);<br/>const [timerMode, setTimerMode] = useState(&quot;focus&quot;);<br/>const [sessions, setSessions] = useState(0);<br/>const timerRef = useRef(null);<br/>const saveTimer = useRef(null);<br/>const initialized = useRef(false);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80b9-b7a1-e9ad82e96aab" class="">const loadRemoteData = (remoteData) =&gt; {<br/>if (!remoteData) return;<br/>const lastDate = remoteData.lastDate;<br/>if (lastDate === today &amp;&amp; remoteData.priorities) setPriorities(remoteData.priorities);<br/>if (remoteData.dump) setDump(remoteData.dump);<br/>if (remoteData.goals) setGoals(remoteData.goals);<br/>if (remoteData.weekNotes) setWeekNotes(remoteData.weekNotes);<br/>if (remoteData.blocks) setBlocks(remoteData.blocks);<br/>};</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8012-8567-ef541056f7f5" class="">const handleSetup = (key, remoteData) =&gt; {<br/>setSyncKey(key);<br/>loadRemoteData(remoteData);<br/>setSynced(true);<br/>initialized.current = true;<br/>};</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-802d-bce5-e69d6ff820c7" class="">// On mount if key already exists, load from Supabase<br/>useEffect(() =&gt; {<br/>if (!syncKey) return;<br/>(async () =&gt; {<br/>try {<br/>const { data, error } = await sb.from(&quot;command_center&quot;).select(&quot;data&quot;).eq(&quot;sync_key&quot;, syncKey).maybeSingle();<br/>if (!error &amp;&amp; data?.data) loadRemoteData(data.data);<br/>} catch {}<br/>setSynced(true);<br/>initialized.current = true;<br/>})();<br/>}, []);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8064-b1a8-d09d9bfe3448" class="">// Debounced save to Supabase<br/>const saveToCloud = useCallback((payload) =&gt; {<br/>if (!initialized.current || !syncKey) return;<br/>clearTimeout(saveTimer.current);<br/>setSyncStatus(&quot;saving&quot;);<br/>saveTimer.current = setTimeout(async () =&gt; {<br/>try {<br/>await sb.from(&quot;command_center&quot;).upsert({ sync_key: syncKey, data: payload, updated_at: new Date().toISOString() });<br/>setSyncStatus(&quot;saved&quot;);<br/>setTimeout(() =&gt; setSyncStatus(&quot;idle&quot;), 2000);<br/>} catch {<br/>setSyncStatus(&quot;error&quot;);<br/>}<br/>}, 1200);<br/>}, [syncKey]);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-808b-ac99-ea02199ca7b7" class="">// Watch all state and sync<br/>useEffect(() =&gt; {<br/>if (!initialized.current) return;<br/>saveToCloud({ priorities, dump, goals, weekNotes, blocks, lastDate: today });<br/>}, [priorities, dump, goals, weekNotes, blocks]);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80ef-9587-f33c58f37714" class="">// Timer<br/>useEffect(() =&gt; {<br/>if (timerOn) {<br/>timerRef.current = setInterval(() =&gt; {<br/>setTimerSec(s =&gt; {<br/>if (s &lt;= 1) {<br/>clearInterval(timerRef.current);<br/>setTimerOn(false);<br/>if (timerMode === &quot;focus&quot;) { setSessions(n =&gt; n + 1); setTimerMode(&quot;break&quot;); return 5*60; }<br/>else { setTimerMode(&quot;focus&quot;); return TIMER_DURATION; }<br/>}<br/>return s - 1;<br/>});<br/>}, 1000);<br/>} else { clearInterval(timerRef.current); }<br/>return () =&gt; clearInterval(timerRef.current);<br/>}, [timerOn, timerMode]);</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80cd-aeb5-c5c8b07f1324" class="">if (!syncKey || !synced) {<br/>return &lt;SetupScreen onDone={handleSetup} /&gt;;<br/>}</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80ac-91f5-d8f297ccd287" class="">const doneCount = priorities.filter(p =&gt; p.done &amp;&amp; p.text.trim()).length;<br/>const totalCount = priorities.filter(p =&gt; p.text.trim()).length;<br/>const fmt = s =&gt; <code>${String(Math.floor(s/60)).padStart(2,&quot;0&quot;)}:${String(s%60).padStart(2,&quot;0&quot;)}</code>;<br/>const getHour = t =&gt; { const [h,m] = t.split(&quot;:&quot;).map(Number); return h + m/60; };<br/>const DAY_START = 5, DAY_END = 22, SPAN = 17;<br/>const nowH = now.getHours() + now.getMinutes()/60;<br/>const nowPct = Math.max(0, Math.min(1, (nowH - DAY_START) / SPAN));<br/>const circ = 2 * Math.PI * 54;<br/>const dash = circ * (1 - timerSec / (timerMode === &quot;focus&quot; ? TIMER_DURATION : 5*60));<br/>const hours = [5,7,9,11,13,15,17,19,21];</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80e4-8249-fc1cd16597f1" class="">const statusColor = { idle:&quot;#3a3a42&quot;, saving:&quot;#c8a96e&quot;, saved:&quot;#7eb8a4&quot;, error:&quot;#c87e7e&quot; }[syncStatus];<br/>const statusLabel = { idle:&quot;&quot;, saving:&quot;syncing…&quot;, saved:&quot;synced&quot;, error:&quot;sync failed&quot; }[syncStatus];</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-809a-b8e8-deef8075bb8b" class="">const switchMode = (mode) =&gt; { setTimerMode(mode); setTimerOn(false); setTimerSec(mode===&quot;focus&quot; ? TIMER_DURATION : 5*60); };</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-80a2-8048-d2a27ad7370f" class="">return (<br/>&lt;div style={{minHeight:&quot;100vh&quot;,display:&quot;flex&quot;,flexDirection:&quot;column&quot;}}&gt;</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="33856cf3-9959-8058-b726-ede046229ab4" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">  {/* Header */}
+  &lt;header style={{borderBottom:&quot;1px solid #2a2a30&quot;,padding:&quot;20px 24px 16px&quot;,display:&quot;flex&quot;,justifyContent:&quot;space-between&quot;,alignItems:&quot;flex-end&quot;,flexShrink:0}}&gt;
+    &lt;div&gt;
+      &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,letterSpacing:&quot;0.15em&quot;,color:&quot;#c8a96e&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;4px&quot;}}&gt;
+        {DAYS[now.getDay()]}
+      &lt;/div&gt;
+      &lt;h1 style={{fontSize:&quot;22px&quot;,fontWeight:700,color:&quot;#f0ece4&quot;,lineHeight:1}}&gt;
+        {MONTHS[now.getMonth()]} {now.getDate()}
+      &lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;div style={{display:&quot;flex&quot;,flexDirection:&quot;column&quot;,alignItems:&quot;flex-end&quot;,gap:&quot;4px&quot;}}&gt;
+      &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,color: doneCount===totalCount&amp;&amp;totalCount&gt;0 ? &quot;#7eb8a4&quot; : &quot;#5a5a62&quot;}}&gt;
+        {totalCount &gt; 0 ? `${doneCount}/${totalCount} done` : &quot;nothing set&quot;}
+      &lt;/div&gt;
+      {statusLabel &amp;&amp; (
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color:statusColor,letterSpacing:&quot;0.08em&quot;}}&gt;
+          {statusLabel}
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  {/* Tabs */}
+  &lt;nav style={{display:&quot;flex&quot;,borderBottom:&quot;1px solid #2a2a30&quot;,flexShrink:0,overflowX:&quot;auto&quot;}}&gt;
+    {[[&quot;today&quot;,&quot;Today&quot;],[&quot;goals&quot;,&quot;Goals&quot;],[&quot;schedule&quot;,&quot;Schedule&quot;],[&quot;timer&quot;,&quot;Timer&quot;]].map(([k,l]) =&gt; (
+      &lt;button key={k} onClick={() =&gt; setTab(k)} style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,letterSpacing:&quot;0.12em&quot;,textTransform:&quot;uppercase&quot;,padding:&quot;13px 18px 11px&quot;,border:&quot;none&quot;,background:&quot;transparent&quot;,whiteSpace:&quot;nowrap&quot;,color:tab===k?&quot;#c8a96e&quot;:&quot;#5a5a62&quot;,borderBottom:tab===k?&quot;2px solid #c8a96e&quot;:&quot;2px solid transparent&quot;,marginBottom:&quot;-1px&quot;}}&gt;{l}&lt;/button&gt;
+    ))}
+  &lt;/nav&gt;
+
+  {/* Body */}
+  &lt;div style={{flex:1,overflowY:&quot;auto&quot;,padding:&quot;28px 24px&quot;,maxWidth:&quot;680px&quot;,margin:&quot;0 auto&quot;,width:&quot;100%&quot;}}&gt;
+
+    {tab === &quot;today&quot; &amp;&amp; &lt;&gt;
+      &lt;div style={{marginBottom:&quot;36px&quot;}}&gt;
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,letterSpacing:&quot;0.2em&quot;,color:&quot;#5a5a62&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;14px&quot;}}&gt;The Big 3&lt;/div&gt;
+        {priorities.map((p,i) =&gt; (
+          &lt;div key={p.id} style={{display:&quot;flex&quot;,alignItems:&quot;center&quot;,gap:&quot;12px&quot;,padding:&quot;13px 14px&quot;,background:&quot;#17171c&quot;,borderRadius:&quot;8px&quot;,marginBottom:&quot;8px&quot;,border:&quot;1px solid #2a2a30&quot;,opacity:p.done?0.45:1,transition:&quot;opacity 0.2s&quot;}}&gt;
+            &lt;span style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,color:&quot;#c8a96e&quot;,flexShrink:0}}&gt;{i+1}&lt;/span&gt;
+            &lt;div onClick={() =&gt; setPriorities(prev =&gt; prev.map(x =&gt; x.id===p.id ? {...x,done:!x.done} : x))}
+              style={{width:&quot;17px&quot;,height:&quot;17px&quot;,borderRadius:&quot;50%&quot;,border:p.done?&quot;2px solid #7eb8a4&quot;:&quot;2px solid #3a3a42&quot;,background:p.done?&quot;#7eb8a4&quot;:&quot;transparent&quot;,cursor:&quot;pointer&quot;,flexShrink:0,display:&quot;flex&quot;,alignItems:&quot;center&quot;,justifyContent:&quot;center&quot;,transition:&quot;all 0.15s&quot;}}&gt;
+              {p.done &amp;&amp; &lt;span style={{color:&quot;#0f0f11&quot;,fontSize:&quot;9px&quot;,fontWeight:700}}&gt;✓&lt;/span&gt;}
+            &lt;/div&gt;
+            &lt;input value={p.text} onChange={e =&gt; setPriorities(prev =&gt; prev.map(x =&gt; x.id===p.id ? {...x,text:e.target.value} : x))}
+              placeholder={`Priority ${i+1}…`}
+              style={{background:&quot;transparent&quot;,border:&quot;none&quot;,color:&quot;#e8e4dc&quot;,fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;15px&quot;,flex:1,caretColor:&quot;#c8a96e&quot;,textDecoration:p.done?&quot;line-through&quot;:&quot;none&quot;}} /&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,letterSpacing:&quot;0.2em&quot;,color:&quot;#5a5a62&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;14px&quot;}}&gt;Brain dump&lt;/div&gt;
+        &lt;div style={{display:&quot;flex&quot;,gap:&quot;8px&quot;,marginBottom:&quot;14px&quot;}}&gt;
+          &lt;input value={dumpInput} onChange={e =&gt; setDumpInput(e.target.value)}
+            onKeyDown={e =&gt; { if(e.key===&quot;Enter&quot;&amp;&amp;dumpInput.trim()){setDump(prev=&gt;[{id:Date.now(),text:dumpInput.trim(),done:false},...prev]);setDumpInput(&quot;&quot;);}}}
+            placeholder=&quot;Thought, task, reminder…&quot;
+            style={{flex:1,background:&quot;#17171c&quot;,border:&quot;1px solid #2a2a30&quot;,borderRadius:&quot;8px&quot;,color:&quot;#e8e4dc&quot;,fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;14px&quot;,padding:&quot;10px 12px&quot;,caretColor:&quot;#c8a96e&quot;}} /&gt;
+          &lt;button onClick={() =&gt; {if(dumpInput.trim()){setDump(prev=&gt;[{id:Date.now(),text:dumpInput.trim(),done:false},...prev]);setDumpInput(&quot;&quot;);}}}
+            style={{background:&quot;#c8a96e&quot;,border:&quot;none&quot;,borderRadius:&quot;8px&quot;,color:&quot;#0f0f11&quot;,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,fontWeight:500,padding:&quot;10px 16px&quot;,letterSpacing:&quot;0.05em&quot;}}&gt;
+            Add
+          &lt;/button&gt;
+        &lt;/div&gt;
+        {dump.length===0 &amp;&amp; &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,color:&quot;#2a2a30&quot;,padding:&quot;8px 0&quot;}}&gt;Empty — capture anything here&lt;/div&gt;}
+        {dump.map(d =&gt; (
+          &lt;div key={d.id} style={{display:&quot;flex&quot;,alignItems:&quot;flex-start&quot;,gap:&quot;10px&quot;,padding:&quot;10px 0&quot;,borderBottom:&quot;1px solid #1e1e24&quot;,opacity:d.done?0.4:1}}&gt;
+            &lt;div onClick={() =&gt; setDump(prev =&gt; prev.map(x =&gt; x.id===d.id?{...x,done:!x.done}:x))}
+              style={{width:&quot;16px&quot;,height:&quot;16px&quot;,borderRadius:&quot;50%&quot;,border:d.done?&quot;2px solid #7eb8a4&quot;:&quot;2px solid #3a3a42&quot;,background:d.done?&quot;#7eb8a4&quot;:&quot;transparent&quot;,cursor:&quot;pointer&quot;,flexShrink:0,marginTop:&quot;2px&quot;,display:&quot;flex&quot;,alignItems:&quot;center&quot;,justifyContent:&quot;center&quot;}}&gt;
+              {d.done &amp;&amp; &lt;span style={{color:&quot;#0f0f11&quot;,fontSize:&quot;8px&quot;,fontWeight:700}}&gt;✓&lt;/span&gt;}
+            &lt;/div&gt;
+            &lt;span style={{flex:1,fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;14px&quot;,color:&quot;#e8e4dc&quot;,textDecoration:d.done?&quot;line-through&quot;:&quot;none&quot;,lineHeight:1.5}}&gt;{d.text}&lt;/span&gt;
+            &lt;button onClick={() =&gt; setDump(prev =&gt; prev.filter(x =&gt; x.id!==d.id))}
+              style={{background:&quot;none&quot;,border:&quot;none&quot;,color:&quot;#3a3a42&quot;,fontSize:&quot;16px&quot;,padding:&quot;0 2px&quot;,lineHeight:1,flexShrink:0}}&gt;×&lt;/button&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/&gt;}
+
+    {tab === &quot;goals&quot; &amp;&amp; &lt;&gt;
+      &lt;div style={{marginBottom:&quot;36px&quot;}}&gt;
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,letterSpacing:&quot;0.2em&quot;,color:&quot;#5a5a62&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;14px&quot;}}&gt;This week&#x27;s objectives&lt;/div&gt;
+        {goals.map((g,i) =&gt; (
+          &lt;div key={i} style={{display:&quot;flex&quot;,alignItems:&quot;center&quot;,gap:&quot;12px&quot;,marginBottom:&quot;12px&quot;}}&gt;
+            &lt;span style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,color:&quot;#a07ec8&quot;,width:&quot;22px&quot;,flexShrink:0}}&gt;W{i+1}&lt;/span&gt;
+            &lt;input value={g} onChange={e =&gt; setGoals(prev =&gt; { const n=[...prev]; n[i]=e.target.value; return n; })}
+              placeholder={`Goal ${i+1}…`}
+              style={{flex:1,background:&quot;transparent&quot;,border:&quot;none&quot;,borderBottom:&quot;1px solid #2a2a30&quot;,color:&quot;#e8e4dc&quot;,fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;14px&quot;,padding:&quot;6px 0&quot;,caretColor:&quot;#c8a96e&quot;}} /&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;div style={{padding:&quot;20px&quot;,background:&quot;#17171c&quot;,borderRadius:&quot;8px&quot;,border:&quot;1px solid #2a2a30&quot;}}&gt;
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,letterSpacing:&quot;0.18em&quot;,color:&quot;#5a5a62&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;16px&quot;}}&gt;Weekly check-in&lt;/div&gt;
+        {[[&quot;win&quot;,&quot;Win this week&quot;,&quot;#7eb8a4&quot;],[&quot;obstacle&quot;,&quot;Main obstacle&quot;,&quot;#c87e7e&quot;],[&quot;next&quot;,&quot;Focus next week&quot;,&quot;#c8a96e&quot;]].map(([key,label,color]) =&gt; (
+          &lt;div key={key} style={{marginBottom:&quot;16px&quot;}}&gt;
+            &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color,letterSpacing:&quot;0.1em&quot;,marginBottom:&quot;8px&quot;}}&gt;{label}&lt;/div&gt;
+            &lt;textarea value={weekNotes[key]} onChange={e =&gt; setWeekNotes(prev=&gt;({...prev,[key]:e.target.value}))}
+              placeholder=&quot;…&quot;
+              style={{background:&quot;#0f0f11&quot;,border:&quot;1px solid #2a2a30&quot;,borderRadius:&quot;6px&quot;,color:&quot;#e8e4dc&quot;,fontFamily:&quot;&#x27;Lora&#x27;,serif&quot;,fontSize:&quot;13px&quot;,padding:&quot;8px 10px&quot;,width:&quot;100%&quot;,minHeight:&quot;60px&quot;,resize:&quot;vertical&quot;,caretColor:&quot;#c8a96e&quot;}} /&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/&gt;}
+
+    {tab === &quot;schedule&quot; &amp;&amp; &lt;&gt;
+      &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,letterSpacing:&quot;0.2em&quot;,color:&quot;#5a5a62&quot;,textTransform:&quot;uppercase&quot;,marginBottom:&quot;20px&quot;}}&gt;Daily time blocks&lt;/div&gt;
+      &lt;div style={{display:&quot;flex&quot;,gap:&quot;14px&quot;}}&gt;
+        &lt;div style={{width:&quot;40px&quot;,flexShrink:0,position:&quot;relative&quot;,minHeight:&quot;460px&quot;}}&gt;
+          {hours.map(h =&gt; {
+            const pct = (h-DAY_START)/SPAN;
+            return &lt;div key={h} style={{position:&quot;absolute&quot;,top:`${pct*100}%`,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color:&quot;#3a3a42&quot;,transform:&quot;translateY(-50%)&quot;,width:&quot;38px&quot;,textAlign:&quot;right&quot;}}&gt;
+              {h&lt;12?`${h}am`:h===12?&quot;12pm&quot;:`${h-12}pm`}
+            &lt;/div&gt;;
+          })}
+        &lt;/div&gt;
+        &lt;div style={{flex:1,position:&quot;relative&quot;,minHeight:&quot;460px&quot;,borderLeft:&quot;1px solid #2a2a30&quot;}}&gt;
+          {hours.map(h =&gt; &lt;div key={h} style={{position:&quot;absolute&quot;,top:`${((h-DAY_START)/SPAN)*100}%`,left:0,right:0,borderTop:&quot;1px solid #1e1e24&quot;}} /&gt;)}
+          {nowH&gt;=DAY_START &amp;&amp; nowH&lt;=DAY_END &amp;&amp; (
+            &lt;div style={{position:&quot;absolute&quot;,top:`${nowPct*100}%`,left:0,right:0,height:&quot;1px&quot;,background:&quot;#c8a96e&quot;,zIndex:5,display:&quot;flex&quot;,alignItems:&quot;center&quot;}}&gt;
+              &lt;div style={{width:&quot;6px&quot;,height:&quot;6px&quot;,borderRadius:&quot;50%&quot;,background:&quot;#c8a96e&quot;,marginLeft:&quot;-3px&quot;,flexShrink:0}} /&gt;
+            &lt;/div&gt;
+          )}
+          {blocks.map(b =&gt; {
+            const s1=getHour(b.start), e1=getHour(b.end);
+            const top=((s1-DAY_START)/SPAN)*100, height=((e1-s1)/SPAN)*100;
+            return (
+              &lt;div key={b.id} onClick={() =&gt; setEditBlock(editBlock===b.id?null:b.id)}
+                style={{position:&quot;absolute&quot;,top:`${top}%`,left:&quot;10px&quot;,right:0,height:`${height}%`,background:`${b.color}20`,borderLeft:`3px solid ${b.color}`,borderRadius:&quot;0 6px 6px 0&quot;,padding:&quot;5px 8px&quot;,cursor:&quot;pointer&quot;,overflow:&quot;hidden&quot;,boxSizing:&quot;border-box&quot;}}&gt;
+                &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color:b.color,letterSpacing:&quot;0.06em&quot;}}&gt;{b.start}–{b.end}&lt;/div&gt;
+                {editBlock===b.id
+                  ? &lt;input autoFocus value={b.label} onClick={e=&gt;e.stopPropagation()}
+                      onChange={e=&gt;setBlocks(prev=&gt;prev.map(x=&gt;x.id===b.id?{...x,label:e.target.value}:x))}
+                      style={{background:&quot;transparent&quot;,border:&quot;none&quot;,borderBottom:`1px solid ${b.color}`,color:&quot;#e8e4dc&quot;,fontFamily:&quot;&#x27;Syne&#x27;,sans-serif&quot;,fontSize:&quot;12px&quot;,width:&quot;100%&quot;,caretColor:b.color}} /&gt;
+                  : &lt;div style={{fontFamily:&quot;&#x27;Syne&#x27;,sans-serif&quot;,fontSize:&quot;12px&quot;,fontWeight:500,color:&quot;#e8e4dc&quot;,marginTop:&quot;1px&quot;}}&gt;{b.label}&lt;/div&gt;
+                }
+              &lt;/div&gt;
+            );
+          })}
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color:&quot;#3a3a42&quot;,marginTop:&quot;12px&quot;}}&gt;Tap any block to rename it.&lt;/div&gt;
+    &lt;/&gt;}
+
+    {tab === &quot;timer&quot; &amp;&amp; (
+      &lt;div style={{display:&quot;flex&quot;,flexDirection:&quot;column&quot;,alignItems:&quot;center&quot;,paddingTop:&quot;16px&quot;}}&gt;
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,letterSpacing:&quot;0.18em&quot;,textTransform:&quot;uppercase&quot;,color:timerMode===&quot;focus&quot;?&quot;#c8a96e&quot;:&quot;#7eb8a4&quot;,marginBottom:&quot;20px&quot;}}&gt;
+          {timerMode===&quot;focus&quot; ? &quot;Focus session&quot; : &quot;Short break&quot;}
+        &lt;/div&gt;
+        &lt;div style={{position:&quot;relative&quot;,width:&quot;128px&quot;,height:&quot;128px&quot;,marginBottom:&quot;24px&quot;}}&gt;
+          &lt;svg width=&quot;128&quot; height=&quot;128&quot; style={{transform:&quot;rotate(-90deg)&quot;}}&gt;
+            &lt;circle cx=&quot;64&quot; cy=&quot;64&quot; r=&quot;54&quot; fill=&quot;none&quot; stroke=&quot;#1e1e24&quot; strokeWidth=&quot;3&quot; /&gt;
+            &lt;circle cx=&quot;64&quot; cy=&quot;64&quot; r=&quot;54&quot; fill=&quot;none&quot; stroke={timerMode===&quot;focus&quot;?&quot;#c8a96e&quot;:&quot;#7eb8a4&quot;} strokeWidth=&quot;3&quot;
+              strokeDasharray={circ} strokeDashoffset={dash} strokeLinecap=&quot;round&quot;
+              style={{transition:&quot;stroke-dashoffset 0.8s linear&quot;}} /&gt;
+          &lt;/svg&gt;
+          &lt;div style={{position:&quot;absolute&quot;,inset:0,display:&quot;flex&quot;,alignItems:&quot;center&quot;,justifyContent:&quot;center&quot;,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;36px&quot;,fontWeight:300,color:&quot;#f0ece4&quot;,letterSpacing:&quot;0.05em&quot;}}&gt;
+            {fmt(timerSec)}
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div style={{display:&quot;flex&quot;,gap:&quot;10px&quot;,marginBottom:&quot;24px&quot;}}&gt;
+          &lt;button onClick={() =&gt; setTimerOn(r=&gt;!r)}
+            style={{background:timerMode===&quot;focus&quot;?&quot;#c8a96e&quot;:&quot;#7eb8a4&quot;,border:&quot;none&quot;,borderRadius:&quot;6px&quot;,color:&quot;#0f0f11&quot;,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,fontWeight:500,padding:&quot;10px 28px&quot;,letterSpacing:&quot;0.1em&quot;,textTransform:&quot;uppercase&quot;}}&gt;
+            {timerOn?&quot;Pause&quot;:&quot;Start&quot;}
+          &lt;/button&gt;
+          &lt;button onClick={() =&gt; {setTimerOn(false);setTimerSec(timerMode===&quot;focus&quot;?TIMER_DURATION:5*60);}}
+            style={{background:&quot;transparent&quot;,border:&quot;1px solid #2a2a30&quot;,borderRadius:&quot;6px&quot;,color:&quot;#8b8b96&quot;,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,padding:&quot;10px 18px&quot;,letterSpacing:&quot;0.1em&quot;,textTransform:&quot;uppercase&quot;}}&gt;
+            Reset
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;11px&quot;,color:&quot;#5a5a62&quot;,marginBottom:&quot;32px&quot;}}&gt;
+          {sessions} session{sessions!==1?&quot;s&quot;:&quot;&quot;} completed today
+        &lt;/div&gt;
+        &lt;div style={{display:&quot;grid&quot;,gridTemplateColumns:&quot;1fr 1fr&quot;,gap:&quot;10px&quot;,width:&quot;100%&quot;,maxWidth:&quot;280px&quot;}}&gt;
+          {[[&quot;focus&quot;,&quot;25 min focus&quot;,&quot;#c8a96e&quot;],[&quot;break&quot;,&quot;5 min break&quot;,&quot;#7eb8a4&quot;]].map(([mode,label,color]) =&gt; (
+            &lt;div key={mode} onClick={() =&gt; switchMode(mode)}
+              style={{padding:&quot;13px 14px&quot;,background:timerMode===mode?`${color}18`:&quot;#17171c&quot;,border:`1px solid ${timerMode===mode?color+&quot;55&quot;:&quot;#2a2a30&quot;}`,borderRadius:&quot;8px&quot;,cursor:&quot;pointer&quot;,textAlign:&quot;center&quot;}}&gt;
+              &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;10px&quot;,color:timerMode===mode?color:&quot;#5a5a62&quot;,letterSpacing:&quot;0.08em&quot;}}&gt;{label}&lt;/div&gt;
+            &lt;/div&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )}
+
+  &lt;/div&gt;
+
+  {/* Footer sync key */}
+  &lt;div style={{borderTop:&quot;1px solid #1e1e24&quot;,padding:&quot;10px 24px&quot;,display:&quot;flex&quot;,justifyContent:&quot;space-between&quot;,alignItems:&quot;center&quot;,flexShrink:0}}&gt;
+    &lt;div style={{fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color:&quot;#2a2a30&quot;,letterSpacing:&quot;0.08em&quot;}}&gt;
+      key: {syncKey}
+    &lt;/div&gt;
+    &lt;button onClick={() =&gt; { lss(&quot;cc_sync_key&quot;,null); localStorage.removeItem(&quot;cc_sync_key&quot;); window.location.reload(); }}
+      style={{background:&quot;none&quot;,border:&quot;none&quot;,fontFamily:&quot;&#x27;DM Mono&#x27;,monospace&quot;,fontSize:&quot;9px&quot;,color:&quot;#2a2a30&quot;,letterSpacing:&quot;0.08em&quot;,cursor:&quot;pointer&quot;}}&gt;
+      switch key
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8088-9a4c-db1c02deda03" class="">);<br/>}</p></div><div style="display:contents" dir="auto"><p id="33856cf3-9959-8027-af74-d76d3b2dc9c8" class="">ReactDOM.createRoot(document.getElementById(&quot;root&quot;)).render(&lt;App /&gt;);<br/>&lt;/script&gt;<br/>&lt;/body&gt;<br/>&lt;/html&gt;</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
