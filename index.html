@@ -306,6 +306,7 @@ function App() {
               {hours.map(h => <div key={h} style={{position:"absolute",top:`${((h-DAY_START)/SPAN)*100}%`,fontSize:"10px",color:"#475569", fontFamily:"'DM Mono',monospace", width:"100%", textAlign:"right", transform:"translateY(-50%)"}}>{h < 12 ? `${h}am` : h === 12 ? "12pm" : `${h-12}pm`}</div>)}
             </div>
             <div style={{flex:1,position:"relative",borderLeft:"1px solid #1e293b", background:"linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.02) 50%, transparent)"}}>
+              {/* NOW LINE */}
               {nowH >= DAY_START && nowH <= DAY_END && (
                 <div style={{position:"absolute", top:`${((nowH-DAY_START)/SPAN)*100}%`, left:0, right:0, height:"2px", background:"#0ea5e9", zIndex:5, boxShadow:"0 0 10px #0ea5e9"}}>
                   <div style={{position:"absolute", left:-6, top:-4, width:"10px", height:"10px", borderRadius:"50%", background:"#0ea5e9", boxShadow:"0 0 15px #0ea5e9"}} />
