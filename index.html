@@ -115,7 +115,7 @@ function App() {
   const [syncStatus, setSyncStatus] = useState("idle"); // idle | saving | saved | error
 
   const now = new Date();
-  const today = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+  const today = now.toISOString().slice(0, 10);
 
   const [tab, setTab] = useState("today");
   const [priorities, setPriorities] = useState(DEFAULT_DATA.priorities);
@@ -136,11 +136,11 @@ function App() {
   const loadRemoteData = (remoteData) => {
     if (!remoteData) return;
     const lastDate = remoteData.lastDate;
-    if (lastDate === today && remoteData.priorities) setPriorities(remoteData.priorities);
-    if (remoteData.dump) setDump(remoteData.dump);
-    if (remoteData.goals) setGoals(remoteData.goals);
-    if (remoteData.weekNotes) setWeekNotes(remoteData.weekNotes);
-    if (remoteData.blocks) setBlocks(remoteData.blocks);
+    if (lastDate === today && remoteData.priorities) setPriorities([...remoteData.priorities]);
+    if (remoteData.dump) setDump([...remoteData.dump]);
+    if (remoteData.goals) setGoals([...remoteData.goals]);
+    if (remoteData.weekNotes) setWeekNotes({...remoteData.weekNotes});
+    if (remoteData.blocks) setBlocks([...remoteData.blocks]);
   };
 
   const handleSetup = (key, remoteData) => {
@@ -151,17 +151,42 @@ function App() {
   };
 
   // On mount if key already exists, load from Supabase
+  const fetchData = async () => {
+    if (!syncKey) return;
+    try {
+      const { data, error } = await sb.from("command_center").select("data").eq("sync_key", syncKey).order('updated_at', { ascending: false });
+      if (error) throw error;
+      
+      if (data && data.length > 0) {
+        console.log("[Sync] Data received from cloud:", data[0].data);
+        if (syncStatus === "idle") {
+          loadRemoteData(data[0].data);
+        } else {
+          console.log("[Sync] Skipping UI update because local save is in progress.");
+        }
+      }
+    } catch (e) {
+      console.error("[Sync] Fetch error:", e);
+    }
+  };
+
   useEffect(() => {
     if (!syncKey) return;
     (async () => {
-      try {
-        const { data, error } = await sb.from("command_center").select("data").eq("sync_key", syncKey).maybeSingle();
-        if (!error && data?.data) loadRemoteData(data.data);
-      } catch {}
+      await fetchData();
       setSynced(true);
       initialized.current = true;
     })();
-  }, []);
+  }, [syncKey]);
+
+  // Polling for updates
+  useEffect(() => {
+    if (!synced || !syncKey) return;
+    const interval = setInterval(() => {
+      if (syncStatus === "idle") fetchData();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [synced, syncKey, syncStatus]);
 
   // Debounced save to Supabase
   const saveToCloud = useCallback((payload) => {
