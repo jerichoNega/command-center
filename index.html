@@ -144,11 +144,11 @@ function App() {
   const loadRemoteData = (remoteData) => {
     if (!remoteData) return;
     const ld = remoteData.lastDate;
-    if (ld === today && remoteData.priorities) setPriorities([...remoteData.priorities]);
-    if (remoteData.dump) setDump([...remoteData.dump]);
-    if (remoteData.goals) setGoals([...remoteData.goals]);
+    if (ld === today && Array.isArray(remoteData.priorities)) setPriorities([...remoteData.priorities]);
+    if (Array.isArray(remoteData.dump)) setDump([...remoteData.dump]);
+    if (Array.isArray(remoteData.goals)) setGoals([...remoteData.goals]);
     if (remoteData.weekNotes) setWeekNotes({...remoteData.weekNotes});
-    if (remoteData.blocks) setBlocks([...remoteData.blocks]);
+    if (Array.isArray(remoteData.blocks)) setBlocks([...remoteData.blocks]);
   };
 
   const fetchData = async () => {
@@ -156,7 +156,7 @@ function App() {
     try {
       const { data, error } = await sb.from("command_center").select("data").eq("sync_key", syncKey).order('updated_at', { ascending: false });
       if (!error && data?.length > 0 && syncStatus === "idle") loadRemoteData(data[0].data);
-    } catch (e) {}
+    } catch (e) { console.error("Fetch failed", e); }
   };
 
   useEffect(() => {
@@ -178,11 +178,13 @@ function App() {
       try {
         await sb.from("command_center").upsert({ sync_key: syncKey, data: payload, updated_at: new Date().toISOString() });
         setSyncStatus("saved"); setTimeout(() => setSyncStatus("idle"), 2000);
-      } catch { setSyncStatus("error"); }
+      } catch (e) { setSyncStatus("error"); }
     }, 1200);
-  }, [syncKey]);
+  }, [syncKey, initialized]);
 
-  useEffect(() => { if (initialized.current) saveToCloud({ priorities, dump, goals, weekNotes, blocks, lastDate: today }); }, [priorities, dump, goals, weekNotes, blocks]);
+  useEffect(() => { 
+    if (initialized.current) saveToCloud({ priorities, dump, goals, weekNotes, blocks, lastDate: today }); 
+  }, [priorities, dump, goals, weekNotes, blocks]);
 
   useEffect(() => {
     if (timerOn) {
@@ -202,8 +204,12 @@ function App() {
 
   const addBlock = () => {
     const lastBlock = blocks[blocks.length - 1];
-    const newStart = lastBlock ? lastBlock.end : "09:00";
-    const [h, m] = newStart.split(":").map(Number);
+    const newStart = (lastBlock && lastBlock.end) ? lastBlock.end : "09:00";
+    const parts = newStart.split(":");
+    let h = parts.length > 0 ? Number(parts[0]) : 9;
+    let m = parts.length > 1 ? Number(parts[1]) : 0;
+    if (isNaN(h)) h = 9;
+    if (isNaN(m)) m = 0;
     const newEnd = `${String(h + 1).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
     setBlocks([...blocks, { id: Date.now(), label: "New Event", start: newStart, end: newEnd, color: "#38bdf8" }]);
   };
@@ -212,20 +218,29 @@ function App() {
 
   if (!syncKey || !synced) return <SetupScreen onDone={(k, d) => { setSyncKey(k); loadRemoteData(d); setSynced(true); initialized.current = true; }} />;
 
-  const doneCount = priorities.filter(p => p.done && p.text.trim()).length;
-  const totalCount = priorities.filter(p => p.text.trim()).length;
+  // Safety wrappers for render
+  const safePriorities = Array.isArray(priorities) ? priorities : [];
+  const safeBlocks = Array.isArray(blocks) ? blocks : [];
+  const safeDump = Array.isArray(dump) ? dump : [];
+  const safeGoals = Array.isArray(goals) ? goals : [];
+
+  const doneCount = safePriorities.filter(p => p && p.done && p.text && p.text.trim()).length;
+  const totalCount = safePriorities.filter(p => p && p.text && p.text.trim()).length;
   const fmt = s => `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+  
   const getHour = t => { 
     if (!t || typeof t !== 'string') return 0;
     const parts = t.split(":");
     if (parts.length < 2) return 0;
-    const [h,m] = parts.map(Number); 
+    const h = Number(parts[0]), m = Number(parts[1]); 
     return (isNaN(h) ? 0 : h) + (isNaN(m) ? 0 : m/60); 
   };
+
   const DAY_START = 5, DAY_END = 22, SPAN = 17;
   const nowH = now.getHours() + now.getMinutes()/60;
   const statusColor = { idle:"#64748b", saving:"#0ea5e9", saved:"#10b981", error:"#ef4444" }[syncStatus];
-  const currentPriorityText = priorities.find(p => !p.done && p.text.trim())?.text || "Stay focused";
+  const currentPriorityText = safePriorities.find(p => p && !p.done && p.text && p.text.trim())?.text || "Stay focused";
+  const hours = [5,7,9,11,13,15,17,19,21];
 
   return (
     <div style={{minHeight:"100vh",display:"flex",flexDirection:"column"}}>
@@ -268,7 +283,7 @@ function App() {
         {tab === "today" && <div className="animate-in">
           <div style={{marginBottom:"48px"}}>
             <div style={{fontFamily:"'DM Mono',monospace",fontSize:"10px",color:"#64748b",letterSpacing:"0.2em", marginBottom:"16px"}}>THE BIG 3</div>
-            {priorities.map((p,i) => (
+            {safePriorities.map((p,i) => (
               <div key={p.id} className="card" style={{display:"flex",alignItems:"center",gap:"16px",padding:"16px 20px",marginBottom:"12px",opacity:p.done?0.5:1}}>
                 <span style={{fontFamily:"'DM Mono',monospace",fontSize:"12px",color:"#0ea5e9", fontWeight:700}}>{i+1}</span>
                 <div onClick={() => setPriorities(prev => prev.map(x => x.id===p.id?{...x,done:!x.done}:x))} style={{width:"22px",height:"22px",borderRadius:"50%",border:p.done?"2px solid #10b981":"2px solid #334155",background:p.done?"#10b981":"transparent",display:"flex",alignItems:"center",justifyContent:"center", transition:"all 0.2s"}}>{p.done && <span style={{color:"#020617", fontSize:"10px", fontWeight:900}}>✓</span>}</div>
@@ -282,7 +297,7 @@ function App() {
               <input value={dumpInput} onChange={e => setDumpInput(e.target.value)} onKeyDown={e => {if(e.key==="Enter"&&dumpInput.trim()){setDump(p=>[{id:Date.now(),text:dumpInput.trim(),done:false},...p]);setDumpInput("");}}} placeholder="Capture a thought..." className="card" style={{flex:1,padding:"14px 16px",color:"#f1f5f9", fontSize:"15px", fontFamily:"'Lora',serif"}} />
               <button onClick={() => {if(dumpInput.trim()){setDump(p=>[{id:Date.now(),text:dumpInput.trim(),done:false},...p]);setDumpInput("");}}} style={{background:"#0ea5e9", color:"#020617", border:"none", borderRadius:"12px", padding:"0 24px", fontWeight:700, fontSize:"11px"}}>ADD</button>
             </div>
-            {dump.map(d => (
+            {safeDump.map(d => (
               <div key={d.id} className="animate-in" style={{display:"flex",alignItems:"center",gap:"14px",padding:"16px 0",borderBottom:"1px solid #1e293b",opacity:d.done?0.5:1}}>
                 <div onClick={() => setDump(prev => prev.map(x => x.id===d.id?{...x,done:!x.done}:x))} style={{width:"18px",height:"18px",borderRadius:"50%",border:d.done?"2px solid #10b981":"2px solid #334155", background: d.done ? "#10b981" : "transparent", display:"flex",alignItems:"center",justifyContent:"center"}}>{d.done && <span style={{color:"#020617", fontSize:"9px", fontWeight:900}}>✓</span>}</div>
                 <span style={{flex:1,fontFamily:"'Lora',serif",fontSize:"15px",color:d.done?"#64748b":"#cbd5e1",textDecoration:d.done?"line-through":"none", lineHeight:1.6}}>{d.text}</span>
@@ -294,7 +309,7 @@ function App() {
 
         {tab === "goals" && <div className="animate-in">
           <div style={{fontFamily:"'DM Mono',monospace",fontSize:"10px",color:"#64748b",letterSpacing:"0.2em", marginBottom:"24px"}}>WEEKLY OBJECTIVES</div>
-          {goals.map((g,i) => (
+          {safeGoals.map((g,i) => (
             <div key={i} className="card" style={{display:"flex", alignItems:"center", padding:"16px", marginBottom:"12px"}}>
               <span style={{fontFamily:"'DM Mono',monospace",fontSize:"11px",color:"#0ea5e9", width:"32px"}}>W{i+1}</span>
               <input value={g} onChange={e => setGoals(p => {const n=[...p]; n[i]=e.target.value; return n;})} placeholder={`Goal for week ${i+1}...`} style={{flex:1, background:"transparent", border:"none", color:"#f1f5f9", fontFamily:"'Lora',serif", fontSize:"16px"}} />
@@ -312,13 +327,12 @@ function App() {
               {hours.map(h => <div key={h} style={{position:"absolute",top:`${((h-DAY_START)/SPAN)*100}%`,fontSize:"10px",color:"#475569", fontFamily:"'DM Mono',monospace", width:"100%", textAlign:"right", transform:"translateY(-50%)"}}>{h < 12 ? `${h}am` : h === 12 ? "12pm" : `${h-12}pm`}</div>)}
             </div>
             <div style={{flex:1,position:"relative",borderLeft:"1px solid #1e293b", background:"linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.02) 50%, transparent)"}}>
-              {/* NOW LINE */}
               {nowH >= DAY_START && nowH <= DAY_END && (
                 <div style={{position:"absolute", top:`${((nowH-DAY_START)/SPAN)*100}%`, left:0, right:0, height:"2px", background:"#0ea5e9", zIndex:5, boxShadow:"0 0 10px #0ea5e9"}}>
                   <div style={{position:"absolute", left:-6, top:-4, width:"10px", height:"10px", borderRadius:"50%", background:"#0ea5e9", boxShadow:"0 0 15px #0ea5e9"}} />
                 </div>
               )}
-              {blocks.filter(b => b && b.start && b.end).map(b => {
+              {safeBlocks.filter(b => b && b.start && b.end).map(b => {
                 const s=getHour(b.start), e=getHour(b.end);
                 const isLive = nowH >= s && nowH <= e;
                 return (
